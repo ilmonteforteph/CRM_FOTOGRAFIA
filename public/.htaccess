@@ -1,0 +1,29 @@
+# ============================
+# Gestionale Fotografo - .htaccess
+# ============================
+
+# Disabilita i rewrite di WordPress per questa cartella
+RewriteEngine Off
+
+# File di default della cartella
+DirectoryIndex login.php
+
+# Protezione base: impedisce accesso diretto ai file .htaccess o file sensibili
+# I file in questa lista (config.php, db.php, ecc.) NON saranno accessibili direttamente
+<FilesMatch "^(\.htaccess|config\.php|db\.php|auth\.php|movements\.php)$">
+    Require all denied
+</FilesMatch>
+
+# LA SEZIONE SEGUENTE È STATA RIMOSSA/COMMENTATA PER CONSENTIRE
+# L'ACCESSO DIRETTO ALLE ALTRE PAGINE PHP (es. dashboard.php, ecc.)
+
+# # Blocca l’accesso diretto alle include PHP se non via login.php/index.php
+# <Files "*.php">
+#     # Se la richiesta non viene dal login o dall’utente loggato
+#     <IfModule mod_rewrite.c>
+#         RewriteEngine On
+#         RewriteCond %{REQUEST_FILENAME} !login\.php$
+#         RewriteCond %{REQUEST_FILENAME} !index\.php$
+#         RewriteRule ^.*$ login.php [L,R=302]
+#     </IfModule>
+# </Files>
